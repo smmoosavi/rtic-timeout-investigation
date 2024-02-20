@@ -18,5 +18,6 @@ embedded-hal = "0.2.7"
 stm32l0xx-hal = { version = "0.10.0", features = ["mcu-STM32L071CBTx", "rt"] }
 critical-section = "1"
 rtic = { version = "2.0.1", features = ["thumbv6-backend"] }
+rtic-monotonics = { version = "1", features = ["cortex-m-systick"] }
 rtt-target = "0.5.0"
 panic-rtt-target = "0.1"

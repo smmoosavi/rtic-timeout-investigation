@@ -4,12 +4,12 @@ use core::task::Context;
 use core::task::Poll;
 
 pub struct DummyFuture<const N: usize> {
-    data: [u8; N],
+    _data: [u8; N],
 }
 
 impl<const N: usize> DummyFuture<N> {
     pub fn new() -> Self {
-        Self { data: [0; N] }
+        Self { _data: [0; N] }
     }
 }
 
