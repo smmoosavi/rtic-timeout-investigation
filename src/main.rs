@@ -56,6 +56,14 @@ mod app {
         .await
         .ok();
 
+        Systick::timeout_after(
+            100.millis(),
+            DummyFuture::<1024>::new().inspect_size("dummy_future 1024"),
+        )
+            .inspect_size("timeout_after 1024")
+            .await
+            .ok();
+
         // Output:
         // dummy_future 8 size: 8
         // timeout_after 8 size: 152 (= 8 * 4 + 120)
@@ -63,5 +71,19 @@ mod app {
         // timeout_after 16 size: 184 (= 16 * 4 + 120)
         // dummy_future 32 size: 32
         // timeout_after 32 size: 248 (= 32 * 4 + 120)
+        // dummy_future 1024 size: 1024
+        // timeout_after 1024 size: 4216 (= 1024 * 4 + 120)
+
+        // # bss section size:
+        // run `cargo size --release --target thumbv6m-none-eabi -- -A` to get the size
+        //
+        // v1: without dummy<1024>
+        // v2: with dummy<1024>
+        //
+        // after add dummy<1024>, .bss section size changed from 1360 to 5328
+        // 5328 - 1360 = 3968
+        // 4216 - 248 = 3968 (timeout<dummy<1024>> - timeout<dummy<32>>)
+        // timeout<dummy<32>> is the largest struct in task1 in v1
+        // timeout<dummy<1024>> is the largest struct in task1 in v2
     }
 }
