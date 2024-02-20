@@ -2,6 +2,8 @@
 #![no_std]
 #![feature(type_alias_impl_trait)]
 
+mod inspect_size;
+
 use panic_rtt_target as _;
 
 #[rtic::app(device = stm32l0xx_hal::pac, peripherals = true, dispatchers = [SPI1, SPI2])]
