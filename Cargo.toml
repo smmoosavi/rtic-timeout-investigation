@@ -5,4 +5,18 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 's'
+panic = 'abort'
+debug = true
+
 [dependencies]
+cortex-m = { version = "0.7.7", features = ["critical-section-single-core"] }
+embedded-hal = "0.2.7"
+stm32l0xx-hal = { version = "0.10.0", features = ["mcu-STM32L071CBTx", "rt"] }
+critical-section = "1"
+rtic = { version = "2.0.1", features = ["thumbv6-backend"] }
+rtt-target = "0.5.0"
+panic-rtt-target = "0.1"

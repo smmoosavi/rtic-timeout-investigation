@@ -1,0 +1,7 @@
+[default.general]
+chip = "STM32L071CBTx"
+
+[default.rtt]
+enabled = true
+log_enabled = true
+log_path = "./.logs"

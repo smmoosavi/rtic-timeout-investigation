@@ -1,0 +1,15 @@
+[target.'cfg(all(target_arch = "arm", target_os = "none"))']
+runner = 'probe-rs run --chip STM32L071CBTx'
+
+rustflags = [
+#    "-C",
+#    "linker=flip-link",
+
+    # See https://github.com/rust-embedded/cortex-m-quickstart/pull/95
+    "-C",
+    "link-arg=--nmagic",
+
+    # LLD (shipped with the Rust toolchain) is used as the default linker
+    "-C",
+    "link-arg=-Tlink.x",
+]
